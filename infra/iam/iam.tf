@@ -88,3 +88,8 @@ resource "aws_iam_instance_profile" "s3_access_profile" {
   name = "${var.s3_access_profile_name}"
   role = "${aws_iam_role.s3_access_role.name}"
 }
+
+#outputs
+output "s3_access_profile" {
+  value = "${aws_iam_instance_profile.3_access_profile.name}"
+}
