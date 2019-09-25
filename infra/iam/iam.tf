@@ -1,4 +1,10 @@
 
+provider "aws" {
+  region = "${var.aws_region}"
+}
+terraform {
+  backend "s3" {}
+}
 resource "aws_iam_role" "codedeploy_service" {
   name = "${var.iamrolename}"
 
