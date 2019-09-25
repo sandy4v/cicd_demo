@@ -43,7 +43,7 @@ resource "aws_instance" "ec2_pub" {
   ami                    = "ami-00eb20669e0990cb4"
   instance_type          = "t2.micro"
   vpc_security_group_ids = ["${aws_security_group.sg_pub.id}"]
- # iam_instance_profile = "${module.tf_iam.s3_access_profile_name}"
+ iam_instance_profile = "${module.tf_iam.s3_access_profile_name}"
   key_name               = "${var.key_pair_name}"
   user_data = <<-EOF
               #!/bin/bash
