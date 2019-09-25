@@ -40,6 +40,7 @@ resource "aws_instance" "ec2_pub" {
   ami                    = "ami-00eb20669e0990cb4"
   instance_type          = "t2.micro"
   vpc_security_group_ids = ["${aws_security_group.sg_pub.id}"]
+  iam_instance_profile = "${aws_iam_instance_profile.s3_access_profile.name}"
   key_name               = "${var.key_pair_name}"
   user_data = <<-EOF
               #!/bin/bash
@@ -64,60 +65,5 @@ resource "aws_instance" "ec2_pub" {
     Name = "tf_${var.instance_name}_pub"
   }
 
-
 }
 
-/*
-# ---------------------------------------------------------------------------------------------------------------------
-# DEPLOY THE EC2 INSTANCE WITH A PRIVATE IP
-# ---------------------------------------------------------------------------------------------------------------------
-
-resource "aws_instance" "example_private" {
-  ami                    = "${data.aws_ami.ubuntu.id}"
-  instance_type          = "t2.micro"
-  vpc_security_group_ids = ["${aws_security_group.example.id}"]
-  key_name               = "${var.key_pair_name}"
-
-  # This EC2 Instance has a private IP and will be accessible only from within the VPC
-  associate_public_ip_address = false
-
-  tags {
-    Name = "${var.instance_name}-private"
-  }
-}
-*/
-# ---------------------------------------------------------------------------------------------------------------------
-# CREATE A SECURITY GROUP TO CONTROL WHAT REQUESTS CAN GO IN AND OUT OF THE EC2 INSTANCES
-# ---------------------------------------------------------------------------------------------------------------------
-
-
-/*
-# ---------------------------------------------------------------------------------------------------------------------
-# LOOK UP THE LATEST UBUNTU AMI
-# ---------------------------------------------------------------------------------------------------------------------
-
-data "aws_ami" "ubuntu" {
-  most_recent = true
-  owners      = ["099720109477"] # Canonical
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-
-  filter {
-    name   = "architecture"
-    values = ["x86_64"]
-  }
-
-  filter {
-    name   = "image-type"
-    values = ["machine"]
-  }
-
-  filter {
-    name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*"]
-  }
-}
-*/
