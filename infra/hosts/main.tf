@@ -8,13 +8,8 @@ provider "aws" {
 }
 
 terraform {
-  backend "s3" {
-
-    bucket = "tf-s3-state-bucket"
-    key    = "tfstate/cicd-demo/hosts/terraform.tfstate"
-    region = "us-east-1"
-
-}}
+  backend "s3" {}
+}
 # ---------------------------------------------------------------------------------------------------------------------
 # DEPLOY THE EC2 INSTANCE WITH A PUBLIC IP
 # ---------------------------------------------------------------------------------------------------------------------
