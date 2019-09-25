@@ -1,6 +1,3 @@
-resource "aws_codedeploy_app" "kdcodedeploy" {
-  name = "${var.codedepappname}"
-}
 
 resource "aws_iam_role" "codedeploy_service" {
   name = "${var.iamrolename}"
