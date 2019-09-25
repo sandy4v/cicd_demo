@@ -14,9 +14,9 @@ terraform {
 # DEPLOY THE EC2 INSTANCE WITH A PUBLIC IP
 # ---------------------------------------------------------------------------------------------------------------------
 
-module "tf_iam" {
-  source = "../iam"
-}
+# module "tf_iam" {
+#   source = "../iam"
+# }
 resource "aws_security_group" "sg_pub" {
   name = "tf_sg_${var.instance_name}_pub"
 
