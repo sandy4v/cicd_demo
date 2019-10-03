@@ -15,9 +15,30 @@ terraform {
 # ---------------------------------------------------------------------------------------------------------------------
 # DEPLOY THE EC2 INSTANCE WITH A PUBLIC IP
 # ---------------------------------------------------------------------------------------------------------------------
-module "tf_iam" {
-  source = "../iam"
+# module "tf_iam" {
+#   source = "../iam"
+# }
+
+########################################
+#Get Config for IAM roles
+########################################
+variable "iam_key" {
+    default="tfstate/cicd-demo/iam/terraform.tfstate"
 }
+
+data "terraform_remote_state" "iam_info" {
+    backend = "s3"
+    config = {
+        bucket  = "${var.s3_tf_bckt_name}"
+        key     = "${var.iam_key}"
+        region  = "${var.aws_region}"
+    }
+
+}
+
+########################################
+# Create Public Security Group
+########################################
 resource "aws_security_group" "sg_pub" {
   name = "tf_sg_${var.instance_name}_pub"
 
@@ -38,13 +59,16 @@ resource "aws_security_group" "sg_pub" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
-
+########################################
+#Get EC2 instance in the public subnet
+########################################
 resource "aws_instance" "ec2_pub" {
 //  ami                    = "${data.aws_ami.ubuntu.id}"
   ami                    = "ami-00eb20669e0990cb4"
   instance_type          = "t2.micro"
   vpc_security_group_ids = ["${aws_security_group.sg_pub.id}"]
- iam_instance_profile = "${module.tf_iam.s3_access_profile_name}"
+#  iam_instance_profile = "${module.tf_iam.s3_access_profile_name}"
+  iam_instance_profile = "${data.terraform_remote_state.iam_info.s3_access_profile_name}"
   key_name               = "${var.key_pair_name}"
   user_data = <<-EOF
               #!/bin/bash

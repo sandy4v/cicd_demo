@@ -1,3 +1,21 @@
+
+
+########################################
+#Get Config for IAM roles
+########################################
+variable "sg_key" {
+    default="tfstate/cicd-demo/iam/terraform.tfstate"
+}
+
+data "terraform_remote_state" "sg_info" {
+    backend = "s3"
+    config = {
+        bucket  = "${var.s3_tf_bckt_name}"
+        key     = "${var.sg_key}"
+        region  = "${var.aws_region}"
+    }
+
+}
 # create a deployment group
 resource "aws_codedeploy_app" "codedeploy_app0" {
   name = "${var.codedepappname}"
