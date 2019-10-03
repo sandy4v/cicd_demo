@@ -28,7 +28,7 @@ variable "aws_region" {
 
 variable "instance_name" {
   description = "The Name tag to set for the EC2 Instance."
-  default     = "cicd_appserver0_pub"
+  default     = "cicd_appserver0"
 }
 
 variable "ssh_port" {
