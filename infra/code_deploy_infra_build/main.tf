@@ -24,7 +24,7 @@ data "terraform_remote_state" "iam_info" {
 resource "aws_s3_bucket" "codedeploy_s3_bucket" {
   bucket = "${var.s3_tf_codedep_bckt_name}"
   tags = {
-    Name        = "${var.s3_tf_coddep_bckt_name}"
+    Name        = "${var.s3_tf_codedep_bckt_name}"
     Environment = "${var.env}"
   }
   versioning {
