@@ -12,4 +12,5 @@ variable "s3_tf_codedep_bckt_name" { default = "cd_cicd_demo"}
 variable "visibility" { default = "public"}
 variable "env" { default = "dev"}
 
-variable "instance_tag" {}
+variable "tag_filter_key"	    { default = "Name" }
+variable "tag_filter_value"	    { default = "cicd_appserver_pub" }

@@ -43,10 +43,10 @@ resource "aws_codedeploy_deployment_group" "codedepgroup" {
 
   deployment_config_name = "${var.deptype}" # AWS defined deployment config
 
-  ec2_tag_filter = {
-    key   = "Name"
+  ec2_tag_filter {
+    key   = "${var.tag_filter_key}"
     type  = "KEY_AND_VALUE"
-    value = "${var.instance_tag}"
+    value = "uat-${var.tag_filter_value1}"
   }
 
   # trigger a rollback on deployment failure event
