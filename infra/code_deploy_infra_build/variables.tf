@@ -7,7 +7,7 @@ variable "depgroupname" { default = "dg_cicd_demo"}
 variable "iamrolename" { default = "tf_codedep_role"}
 variable "deptype" { default = "CodeDeployDefault.OneAtATime" }
 variable "s3_tf_bckt_name" { default = "tf-s3-state-bucket"}
-variable "s3_tf_codedep_bckt_name" { default = "cd_cicd_demo"}
+variable "s3_tf_codedep_bckt_name" { default = "codedeploy-cicd-demo"}
 
 variable "visibility" { default = "public"}
 variable "env" { default = "dev"}
