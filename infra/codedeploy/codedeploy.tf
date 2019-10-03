@@ -21,11 +21,10 @@ resource "aws_codedeploy_deployment_group" "kdcodedepgroup" {
   }
 }
 
-
-resource "aws_s3_bucket" "kd_s3_bucket" {
+resource "aws_s3_bucket" "codedeploy_s3_bucket" {
   bucket = "${var.s3_tf_bckt_name}"
   tags = {
-    Name        = "${var.s3_bckt_name}"
+    Name        = "${var.s3_tf_bckt_name}"
     Environment = "${var.env}"
   }
   versioning {
