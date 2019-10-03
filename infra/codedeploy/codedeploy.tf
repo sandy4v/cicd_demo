@@ -1,6 +1,10 @@
 # create a deployment group
-resource "aws_codedeploy_deployment_group" "kdcodedepgroup" {
-  app_name              = "${aws_codedeploy_app.kdcodedeploy.name}"
+resource "aws_codedeploy_app" "codedeploy_app0" {
+  name = "${var.codedepappname}"
+}
+# create a deployment group
+resource "aws_codedeploy_deployment_group" "codedepgroup" {
+  app_name              = "${aws_codedeploy_app.codedeploy_app0.name}"
   deployment_group_name = "${var.depgroupname}"
   service_role_arn      = "${aws_iam_role.codedeploy_service.arn}"
 
@@ -20,6 +24,10 @@ resource "aws_codedeploy_deployment_group" "kdcodedepgroup" {
     ]
   }
 }
+
+# ---------------------------------------------------------------------------------------------------------------------
+# S3 bucket for CodeDeploy artifact store
+# ---------------------------------------------------------------------------------------------------------------------
 
 resource "aws_s3_bucket" "codedeploy_s3_bucket" {
   bucket = "${var.s3_tf_bckt_name}"
