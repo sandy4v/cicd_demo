@@ -93,3 +93,8 @@ resource "aws_iam_instance_profile" "s3_access_profile" {
 output "s3_access_profile_name" {
   value = "${aws_iam_instance_profile.s3_access_profile.name}"
 }
+
+output "iam_cd_service_role_arn" {
+  value = "${aws_iam_role.codedeploy_service.arn}"
+}
+
