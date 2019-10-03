@@ -37,3 +37,5 @@ variable "ssh_port" {
 }
 
 variable "appname" {default="cicd_demo"}
+
+variable "s3_tf_bckt_name" { default = "tf_s3_state_bucket"}
