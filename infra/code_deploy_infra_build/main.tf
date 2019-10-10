@@ -52,7 +52,7 @@ resource "aws_codedeploy_deployment_group" "codedepgroup" {
   ec2_tag_filter {
     key   = "${var.tag_filter_key}"
     type  = "KEY_AND_VALUE"
-    value = "uat-${var.tag_filter_value}"
+    value = "tf_cicd_${var.tag_filter_value}0_pub"
   }
 
   # trigger a rollback on deployment failure event

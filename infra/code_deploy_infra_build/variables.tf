@@ -13,4 +13,4 @@ variable "visibility" { default = "public"}
 variable "env" { default = "dev"}
 
 variable "tag_filter_key"	    { default = "Name" }
-variable "tag_filter_value"	    { default = "cicd_appserver_pub" }
+variable "tag_filter_value"	    { default = "appserver" }
